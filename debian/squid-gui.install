@@ -1,0 +1,5 @@
+/usr/bin/squid-gui
+/usr/bin/squid-gui_polkit
+/usr/applications/squid-gui.desktop
+/usr/polkit-1/actions/com.github.kratos83.squid-gui.policy
+/usr/squid-gui/logo_ico.png

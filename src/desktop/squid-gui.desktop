@@ -1,0 +1,22 @@
+[Desktop Entry]
+Categories=System
+Comment[it]=Configura squid-dansguardian
+Comment=Configura squid-dansguardian
+Encoding=UTF-8
+Exec=/usr/bin/squid-gui_polkit
+GenericName[it]=
+GenericName=
+Icon=/usr/share/squid-gui/logo_ico.png
+MimeType=
+Name[it]=Configura squid-dansguardian
+Name=Squid-gui
+Name[it_IT]=Configura squid-dansguardian
+Path=/usr/bin
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username= 
