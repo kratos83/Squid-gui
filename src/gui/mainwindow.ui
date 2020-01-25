@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>752</width>
+    <width>761</width>
     <height>497</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Squid &amp; Dansguardian configuration</string>
+   <string>Squid &amp; E2guardian configuration</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -31,7 +31,7 @@
            <item row="2" column="2">
             <widget class="QPushButton" name="config_dans">
              <property name="text">
-              <string>Configure DansGuardian</string>
+              <string>Configure E2Guardian</string>
              </property>
              <property name="icon">
               <iconset resource="../images.qrc">
@@ -533,7 +533,7 @@
         <item row="0" column="0">
          <widget class="QGroupBox" name="groupBox_2">
           <property name="title">
-           <string>DansGuardian configuration</string>
+           <string>E2Guardian configuration</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_5">
            <item row="0" column="0">
@@ -580,7 +580,7 @@
                <item row="1" column="0" colspan="6">
                 <widget class="QLabel" name="label_7">
                  <property name="text">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; font-style:italic; color:#0000ff;&quot;&gt;If you are sure to configure dansguardian , then I wish you good work .&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;a name=&quot;tw-target-text&quot;/&gt;&lt;span style=&quot; font-family:'Ubuntu,UbuntuBeta'; font-size:16pt; font-weight:600; font-style:italic; color:#0000ff;&quot;&gt;A&lt;/span&gt;&lt;span style=&quot; font-family:'Ubuntu,UbuntuBeta'; font-size:16pt; font-weight:600; font-style:italic; color:#0000ff;&quot;&gt;fter saving the &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Ubuntu,UbuntuBeta'; font-size:16pt; font-weight:600; font-style:italic; color:#0000ff;&quot;&gt;configuration file start, &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Ubuntu,UbuntuBeta'; font-size:16pt; font-weight:600; font-style:italic; color:#0000ff;&quot;&gt;stop or restart dansguardian.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; font-style:italic; color:#0000ff;&quot;&gt;If you are sure to configure e2guardian , then I wish you good work .&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;a name=&quot;tw-target-text&quot;/&gt;&lt;span style=&quot; font-family:'Ubuntu,UbuntuBeta'; font-size:16pt; font-weight:600; font-style:italic; color:#0000ff;&quot;&gt;A&lt;/span&gt;&lt;span style=&quot; font-family:'Ubuntu,UbuntuBeta'; font-size:16pt; font-weight:600; font-style:italic; color:#0000ff;&quot;&gt;fter saving the &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Ubuntu,UbuntuBeta'; font-size:16pt; font-weight:600; font-style:italic; color:#0000ff;&quot;&gt;configuration file start, &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Ubuntu,UbuntuBeta'; font-size:16pt; font-weight:600; font-style:italic; color:#0000ff;&quot;&gt;stop or restart dansguardian.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                 </widget>
                </item>
@@ -642,7 +642,7 @@
              </widget>
              <widget class="QWidget" name="tab_4">
               <attribute name="title">
-               <string>DansGuardian config</string>
+               <string>E2Guardian config</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_24">
                <item row="1" column="0">
@@ -729,8 +729,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>752</width>
-     <height>30</height>
+     <width>761</width>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -754,11 +754,11 @@
     </property>
     <addaction name="actionBackup_squid"/>
     <addaction name="separator"/>
-    <addaction name="actionBackup_dansguardian"/>
+    <addaction name="actionBackup_e2guardian"/>
     <addaction name="separator"/>
     <addaction name="actionRestore_backup_squid"/>
     <addaction name="separator"/>
-    <addaction name="actionRestore_backup_dansguardian"/>
+    <addaction name="actionRestore_backup_e2guardian"/>
     <addaction name="separator"/>
    </widget>
    <addaction name="menuFile"/>
@@ -789,9 +789,9 @@
     <string>&amp;Restore backup squid</string>
    </property>
   </action>
-  <action name="actionRestore_backup_dansguardian">
+  <action name="actionRestore_backup_e2guardian">
    <property name="text">
-    <string>Restore &amp;backup dansguardian</string>
+    <string>Restore &amp;backup e2sguardian</string>
    </property>
   </action>
   <action name="actionBackup_squid">
@@ -799,9 +799,9 @@
     <string>Backup &amp;squid</string>
    </property>
   </action>
-  <action name="actionBackup_dansguardian">
+  <action name="actionBackup_e2guardian">
    <property name="text">
-    <string>Backup &amp;dansguardian</string>
+    <string>Backup &amp;e2guardian</string>
    </property>
   </action>
   <action name="actionDonatr">

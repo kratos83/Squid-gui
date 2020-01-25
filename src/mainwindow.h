@@ -5,7 +5,10 @@
 #include <QtGui>
 #include "about.h"
 #include "squid_config.h"
-#include "dansguardian_config.h"
+#include "e2guardian_config.h"
+
+using namespace squid_config;
+using namespace e2guardian_config;
 
 namespace Ui {
 class MainWindow;
@@ -91,6 +94,7 @@ private slots:
     void esci();
 private:
     Ui::MainWindow *ui;
+    SquidConfig *squid;
     QStandardItemModel *model,*model1,*model2,*model3;//Model squid
     QStandardItemModel *m_dans_c;
 };

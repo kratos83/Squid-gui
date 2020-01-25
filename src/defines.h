@@ -201,12 +201,10 @@ static QString getSystemRam(){
         "Memoria utilizzata: "+QString::number(ram_utilizzata,'f',2)+" GB\n"+
         "Memoria libera: "+QString::number(ram_libera,'f',2)+" GB";
   }
-
 #endif
 
   return os_ram;
 }
-
 
 /*
  * Istanzio gli errori

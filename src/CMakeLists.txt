@@ -27,12 +27,12 @@ include_directories(${squid-gui_includes})
 
 set(squid-gui_moc_hdrs 
 	about.h
-	dansguardian_config.h
-	mainwindow.h
-	defines.h
+	e2guardian_config.h
 	settingsmanager.h
 	squid_config.h
 	status_service.h
+	mainwindow.h
+	defines.h
 )
 
 
@@ -50,11 +50,11 @@ qt5_wrap_ui(squid-gui_ui_hdrs ${squid-gui_uis})
 
 set(squid-gui_srcs 
 	about.cpp
-	dansguardian_config.cpp
-	mainwindow.cpp
+	e2guardian_config.cpp
 	squid_config.cpp
 	status_service.cpp
 	settingsmanager.cpp
+	mainwindow.cpp
 	main.cpp
 )
 

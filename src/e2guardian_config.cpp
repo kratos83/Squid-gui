@@ -1,25 +1,25 @@
-#include "dansguardian_config.h"
+#include "e2guardian_config.h"
 #include "defines.h"
 #include "status_service.h"
 
-void dansguardian_config::find_file_config_dans(QString fileName, QStackedWidget *widget)
+void e2guardian_config::find_file_config_dans(QString fileName, QStackedWidget *widget)
 {
      QFile file(fileName);
      if(!file.open(QIODevice::ReadOnly))
      {
-	 LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("Dansguardian::Access denied. Unable to read file. Use root."),
+	 LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("E2Guardian::Access denied. Unable to read file. Use root."),
 	   LOG_ERROR_ALL,QIODevice::Append);
 	 widget->setCurrentIndex(0);
-         QMessageBox::warning(0,QObject::tr("DansGuardian configuration"),QObject::tr("Access denied.\nUnable to read file.\nUse root."));
+         QMessageBox::warning(0,QObject::tr("E2Guardian configuration"),QObject::tr("Access denied.\nUnable to read file.\nUse root."));
      }
      else
      {
-	 LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("Dansguardian::Start your configuration."),
+	 LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("E2Guardian::Start your configuration."),
 	   LOG_INFO_ALL,QIODevice::Append);
      }
 }
 
-void dansguardian_config::read_file_dans(QString nameFile, QStandardItemModel *model)
+void e2guardian_config::read_file_dans(QString nameFile, QStandardItemModel *model)
 {
     QFile file(nameFile);
     if(file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -47,18 +47,18 @@ void dansguardian_config::read_file_dans(QString nameFile, QStandardItemModel *m
             count++;
         }
         file.close();
-	LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("Dansguardian::Load file successfull."),
+	LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("E2Guardian::Load file successfull."),
 	   LOG_INFO_ALL,QIODevice::Append);
     }
     else
     {	
-	LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("Dansguardian::Unable to read file."),
+	LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("E2Guardian::Unable to read file."),
 	   LOG_ERROR_ALL,QIODevice::Append);
-        QMessageBox::warning(0,QObject::tr("DansGuardian configuration"),QObject::tr("Unable to read file."));
+        QMessageBox::warning(0,QObject::tr("E2Guardian configuration"),QObject::tr("Unable to read file."));
     }
 }
 
-void dansguardian_config::write_file_dans(QString fileName, QTableView *view)
+void e2guardian_config::write_file_dans(QString fileName, QTableView *view)
 {
     QFile file(fileName);
     if(file.open(QIODevice::WriteOnly | QIODevice::Text))
@@ -103,97 +103,97 @@ void dansguardian_config::write_file_dans(QString fileName, QTableView *view)
             }
             stream << exportdata;
             file.close();
-	    LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("Dansguardian::Write file successfull."),
+	    LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("E2Guardian::Write file successfull."),
 	   LOG_INFO_ALL,QIODevice::Append);
     }
     else {
-       LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("Dansguardian::Cannot write file."),
+       LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("E2Guardian::Cannot write file."),
 	   LOG_ERROR_ALL,QIODevice::Append);
-       QMessageBox::warning(0,QObject::tr("DansGuardian configuration"),QObject::tr("Cannot write file."));
+       QMessageBox::warning(0,QObject::tr("E2Guardian configuration"),QObject::tr("Cannot write file."));
     }
 }
 
-bool dansguardian_config::start_service_dans()
+bool e2guardian_config::start_service_dans()
 {
     bool ok = false;
     QProcess process;
     process.setEnvironment(QProcess::systemEnvironment());
 #ifdef Q_OS_LINUX
-    process.start("systemctl start dansguardian");
+    process.start("systemctl start e2guardian");
 #elif defined Q_OS_FREEBSD
-    process.start("/usr/local/etc/rc.d/dansguardian start");
+    process.start("/usr/local/etc/rc.d/e2guardian start");
 #endif
     process.waitForFinished();
     process.close();
     return ok ? true : false;
 }
 
-bool dansguardian_config::stop_service_dans()
+bool e2guardian_config::stop_service_dans()
 {
     bool ok = false;
     QProcess process;
     process.setEnvironment(QProcess::systemEnvironment());
 #ifdef Q_OS_LINUX
-    process.start("systemctl stop dansguardian");
+    process.start("systemctl stop e2guardian");
 #elif defined Q_OS_FREEBSD
-    process.start("/usr/local/etc/rc.d/dansguardian stop");
+    process.start("/usr/local/etc/rc.d/e2guardian stop");
 #endif
     process.waitForFinished();
     process.close();
     return ok ? true : false;
 }
 
-bool dansguardian_config::restart_service_dans()
+bool e2guardian_config::restart_service_dans()
 {
     bool ok = false;
     QProcess process;
     process.setEnvironment(QProcess::systemEnvironment());
 #ifdef Q_OS_LINUX
-    process.start("systemctl restart dansguardian");
+    process.start("systemctl restart e2guardian");
 #elif defined Q_OS_FREEBSD
-    process.start("/usr/local/etc/rc.d/dansguardian restart");
+    process.start("/usr/local/etc/rc.d/e2guardian restart");
 #endif
     process.waitForFinished();
     process.close();
     return ok ? true : false;
 }
 
-void dansguardian_config::status_service_dans()
+void e2guardian_config::status_service_dans()
 {
     QProcess process;
     process.setReadChannel(QProcess::StandardOutput);
     process.setProcessChannelMode(QProcess::MergedChannels);
     status_service *st;
 #ifdef Q_OS_LINUX
-    process.start("systemctl status dansguardian");
+    process.start("systemctl status e2guardian");
     process.closeWriteChannel();
     while(process.state() != QProcess::NotRunning)
     {
         process.waitForReadyRead();
         QString result = process.readAll();
-	st = new status_service(result,QObject::tr("Status dansguardian"));
+	st = new status_service(result,QObject::tr("Status e2guardian"));
 	st->exec();
     }
 #elif defined Q_OS_FREEBSD
-    process.start("/usr/local/etc/rc.d/dansguardian status");
+    process.start("/usr/local/etc/rc.d/e2guardian status");
     process.closeWriteChannel();
     while(process.state() != QProcess::NotRunning)
     {
         process.waitForReadyRead();
         QString result = process.readAll();
-	st = new status_service(result,QObject::tr("Status dansguardian"));
+	st = new status_service(result,QObject::tr("Status e2guardian"));
 	st->exec();
     }
 #endif
 }
 
-void dansguardian_config::view_log_error_dans(QStatusBar *label)
+void e2guardian_config::view_log_error_dans(QStatusBar *label)
 {
     QProcess process;
 #ifdef Q_OS_LINUX
     process.setReadChannel(QProcess::StandardOutput);
     process.setProcessChannelMode(QProcess::MergedChannels);
-    process.start("systemctl is-active dansguardian");
+    process.start("systemctl is-active e2guardian");
     process.closeWriteChannel();
     while(process.state() != QProcess::NotRunning)
     {
@@ -202,61 +202,61 @@ void dansguardian_config::view_log_error_dans(QStatusBar *label)
         QStringList list = result.split('\n');
         if(list.at(0) == "active")
         {
-	    LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("Dansguardian started."),
+	    LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("E2Guardian started."),
 		      LOG_INFO_ALL,QIODevice::Append);
-            label->showMessage(QObject::tr("Dansguardian started"));
+            label->showMessage(QObject::tr("E2Guardian started"));
         }
         else if(list.at(0) == "unknown")
         {
-	    LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("Dansguardian stopped."),
+	    LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("E2Guardian stopped."),
 		      LOG_INFO_ALL,QIODevice::Append);
-            label->showMessage(QObject::tr("Dansguardian stopped"));
+            label->showMessage(QObject::tr("E2Guardian stopped"));
         }
         else if(list.at(0) == "failed")
         {
-	    LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("Dansguardian failed to start. Press systemctl status dansguardian."),
+	    LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("E2Guardian failed to start. Press systemctl status e2guardian."),
 		      LOG_ERROR_ALL,QIODevice::Append);
-            label->showMessage(QObject::tr("Dansguardian failed to start. Press systemctl status dansguardian"));
+            label->showMessage(QObject::tr("E2Guardian failed to start. Press systemctl status e2guardian"));
         }
     }
 #elif defined Q_OS_FREEBSD
     process.setReadChannel(QProcess::StandardOutput);
     process.setProcessChannelMode(QProcess::MergedChannels);
-    process.start("/usr/local/etc/rc.d/dansguardian status");
+    process.start("/usr/local/etc/rc.d/e2guardian status");
     process.closeWriteChannel();
     while(process.state() != QProcess::NotRunning)
     {
         process.waitForReadyRead();
         QString result = process.readAll();
         QStringList list = result.split('as');
-        if(list.at(0) == "dansguardian is running")
+        if(list.at(0) == "e2guardian is running")
         {
-	    LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("Dansguardian started."),
+	    LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("E2Guardian started."),
 		      LOG_INFO_ALL,QIODevice::Append);
-            label->showMessage(QObject::tr("Dansguardian started"));
+            label->showMessage(QObject::tr("E2Guardian started"));
         }
-        else if(list.at(0) == "dansguardian is not running")
+        else if(list.at(0) == "e2guardian is not running")
         {
-	    LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("Dansguardian stopped."),
+	    LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("E2Guardian stopped."),
 		      LOG_INFO_ALL,QIODevice::Append);
-            label->showMessage(QObject::tr("Dansguardian stopped"));
+            label->showMessage(QObject::tr("E2Guardian stopped"));
         }
     }
 #endif
 }
 
-void dansguardian_config::backup_dans_config(QString filename)
+void e2guardian_config::backup_dans_config(QString filename)
 {
     QProcess process;
     process.setEnvironment(QProcess::systemEnvironment());
     process.start("cp -rv "+filename+" "+filename+".bkp");
     process.waitForFinished();
     process.close();
-    LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("Dansguardian::Backup successfull."),
+    LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("E2Guardian::Backup successfull."),
 		      LOG_INFO_ALL,QIODevice::Append);
 }
 
-void dansguardian_config::restore_dans_config(QString filename)
+void e2guardian_config::restore_dans_config(QString filename)
 {
     QProcess process;
     process.setReadChannel(QProcess::StandardOutput);
@@ -264,11 +264,11 @@ void dansguardian_config::restore_dans_config(QString filename)
     process.start("cp -rv "+filename+".bkp "+filename);
     process.waitForFinished();
     process.close();
-    LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("DansGuardian::Restore backup successfull."),
+    LOG_FILE("["+QTime::currentTime().toString("hh:mm:ss")+"] "+QObject::tr("E2Guardian::Restore backup successfull."),
 		      LOG_INFO_ALL,QIODevice::Append);
 }
 
-void dansguardian_config::insert_row_dans(QStandardItemModel *model)
+void e2guardian_config::insert_row_dans(QStandardItemModel *model)
 {
     QList<QStandardItem*> item;
     QStandardItem *new_row = new QStandardItem;
@@ -276,7 +276,7 @@ void dansguardian_config::insert_row_dans(QStandardItemModel *model)
     model->appendRow(item);
 }
 
-void dansguardian_config::remove_row_dans(QStandardItemModel *model, QTableView *view)
+void e2guardian_config::remove_row_dans(QStandardItemModel *model, QTableView *view)
 {
     QModelIndex currentIndex = view->selectionModel()->currentIndex();
     model->removeRow(currentIndex.row());

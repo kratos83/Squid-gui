@@ -1,5 +1,5 @@
-#ifndef DANSGUARDIAN_CONFIG_H
-#define DANSGUARDIAN_CONFIG_H
+#ifndef E2GUARDIAN_CONFIG_H
+#define E2GUARDIAN_CONFIG_H
 
 #include <QtGui>
 #include <QStatusBar>
@@ -9,7 +9,7 @@
 #include <QStackedWidget>
 #include <QDebug>
 
-namespace dansguardian_config
+namespace e2guardian_config
 {
     void find_file_config_dans(QString fileName, QStackedWidget *widget);
     void read_file_dans(QString nameFile, QStandardItemModel *model );
@@ -25,4 +25,4 @@ namespace dansguardian_config
     void remove_row_dans(QStandardItemModel *model, QTableView *view);
 }
 
-#endif // DANSGUARDIAN_CONFIG_H
+#endif // E2GUARDIAN_CONFIG_H

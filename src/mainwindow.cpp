@@ -1,15 +1,12 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-using namespace squid_config;
-using namespace dansguardian_config;
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow), 
+    squid(new SquidConfig)
 {
     ui->setupUi(this);
-
     //Exit to application
     connect(ui->actionExit,SIGNAL(triggered(bool)),this,SLOT(esci()));
     //Connect info
@@ -74,27 +71,27 @@ void MainWindow::view_vis_squid()
 void MainWindow::view_squid()
 {
 #ifdef Q_OS_LINUX
-    find_file_config("/etc/squid/squid.conf",ui->stackedWidget);
+    squid->find_file_config("/etc/squid/squid.conf",ui->stackedWidget);
 #elif defined Q_OS_FREEBSD
-    find_file_config("/usr/local/etc/squid/squid.conf",ui->stackedWidget);
+    squid->find_file_config("/usr/local/etc/squid/squid.conf",ui->stackedWidget);
 #endif
 }
 
 void MainWindow::view_parameter_squid()
 {
 #ifdef Q_OS_LINUX
-    read_file("/etc/squid/squid.conf",model);
+    squid->read_file("/etc/squid/squid.conf",model);
 #elif defined Q_OS_FREEBSD
-    read_file("/usr/local/etc/squid/squid.conf",model);
+    squid->read_file("/usr/local/etc/squid/squid.conf",model);
 #endif
 }
 
 void MainWindow::write_parameter_squid()
 {
 #ifdef Q_OS_LINUX
-    write_file("/etc/squid/squid.conf",ui->tableView);
+    squid->write_file("/etc/squid/squid.conf",ui->tableView);
 #elif defined Q_OS_FREEBSD
-    write_file("/usr/local/etc/squid/squid.conf",ui->tableView);
+    squid->write_file("/usr/local/etc/squid/squid.conf",ui->tableView);
 #endif
 }
 
@@ -104,18 +101,18 @@ void MainWindow::write_parameter_squid()
 void MainWindow::view_parameter_mime_squid()
 {
 #ifdef Q_OS_LINUX
-    read_file("/etc/squid/mime.conf",model1);
+    squid->read_file("/etc/squid/mime.conf",model1);
 #elif defined Q_OS_FREEBSD
-    read_file("/usr/local/etc/squid/mime.conf",model1);
+    squid->read_file("/usr/local/etc/squid/mime.conf",model1);
 #endif
 }
 
 void MainWindow::write_parameter_mime_squid()
 {
 #ifdef Q_OS_LINUX
-    write_file("/etc/squid/mime.conf",ui->tableView_2);
+    squid->write_file("/etc/squid/mime.conf",ui->tableView_2);
 #elif defined Q_OS_FREEBSD
-    write_file("/usr/local/etc/squid/mime.conf",ui->tableView_2);
+    squid->write_file("/usr/local/etc/squid/mime.conf",ui->tableView_2);
 #endif
 }
 
@@ -125,18 +122,18 @@ void MainWindow::write_parameter_mime_squid()
 void MainWindow::view_parameter_cache_squid()
 {
 #ifdef Q_OS_LINUX
-    read_file("/etc/squid/cachemgr.conf",model2);
+    squid->read_file("/etc/squid/cachemgr.conf",model2);
 #elif defined Q_OS_FREEBSD
-    read_file("/usr/local/etc/squid/cachemgr.conf",model2);
+    squid->read_file("/usr/local/etc/squid/cachemgr.conf",model2);
 #endif
 }
 
 void MainWindow::write_parameter_cache_squid()
 {
 #ifdef Q_OS_LINUX
-    write_file("/etc/squid/cachemgr.conf",ui->tableView_3);
+    squid->write_file("/etc/squid/cachemgr.conf",ui->tableView_3);
 #elif defined Q_OS_FREEBSD
-    write_file("/usr/local/etc/squid/cachemgr.conf",ui->tableView_3);
+    squid->write_file("/usr/local/etc/squid/cachemgr.conf",ui->tableView_3);
 #endif
 }
 
@@ -146,18 +143,18 @@ void MainWindow::write_parameter_cache_squid()
 void MainWindow::view_parameter_msnt_squid()
 {
 #ifdef Q_OS_LINUX
-    read_file("/etc/squid/msntauth.conf",model3);
+    squid->read_file("/etc/squid/msntauth.conf",model3);
 #elif defined Q_OS_FREEBSD
-    read_file("/usr/local/etc/squid/msntauth.conf",model3);
+    squid->read_file("/usr/local/etc/squid/msntauth.conf",model3);
 #endif
 }
 
 void MainWindow::write_parameter_msnt_squid()
 {
 #ifdef Q_OS_LINUX
-    write_file("/etc/squid/msntauth.conf",ui->tableView_4);
+    squid->write_file("/etc/squid/msntauth.conf",ui->tableView_4);
 #elif defined Q_OS_FREEBSD
-    write_file("/usr/local/etc/squid/msntauth.conf",ui->tableView_4);
+    squid->write_file("/usr/local/etc/squid/msntauth.conf",ui->tableView_4);
 #endif
 }
 
@@ -168,18 +165,18 @@ void MainWindow::write_parameter_msnt_squid()
 void MainWindow::backup_squid()
 {
 #ifdef Q_OS_LINUX
-    backup_squid_config("/etc/squid/squid.conf");
+    squid->backup_squid_config("/etc/squid/squid.conf");
 #elif defined Q_OS_FREEBSD
-    backup_squid_config("/usr/local/etc/squid/squid.conf");
+    squid->backup_squid_config("/usr/local/etc/squid/squid.conf");
 #endif
 }
 
 void MainWindow::restore_squid()
 {
 #ifdef Q_OS_LINUX
-    restore_squid_config("/etc/squid/squid.conf");
+    squid->restore_squid_config("/etc/squid/squid.conf");
 #elif defined Q_OS_FREEBSD
-    restore_squid_config("/usr/local/etc/squid/squid.conf");
+    squid->restore_squid_config("/usr/local/etc/squid/squid.conf");
 #endif
 }
 
@@ -188,42 +185,42 @@ void MainWindow::restore_squid()
  */
 void MainWindow::add_row_squid()
 {
-    insert_row_squid(model);
+    squid->insert_row_squid(model);
 }
 
 void MainWindow::delete_row_squid()
 {
-    remove_row_squid(model,ui->tableView);
+    squid->remove_row_squid(model,ui->tableView);
 }
 
 void MainWindow::add_row_squid_mime()
 {
-    insert_row_squid(model1);
+    squid->insert_row_squid(model1);
 }
 
 void MainWindow::delete_row_squid_mime()
 {
-    remove_row_squid(model1,ui->tableView_2);
+    squid->remove_row_squid(model1,ui->tableView_2);
 }
 
 void MainWindow::add_row_squid_cache()
 {
-    insert_row_squid(model2);
+    squid->insert_row_squid(model2);
 }
 
 void MainWindow::delete_row_squid_cache()
 {
-    remove_row_squid(model2,ui->tableView_3);
+    squid->remove_row_squid(model2,ui->tableView_3);
 }
 
 void MainWindow::add_row_squid_msnt()
 {
-    insert_row_squid(model3);
+    squid->insert_row_squid(model3);
 }
 
 void MainWindow::delete_row_squid_msnt()
 {
-    remove_row_squid(model3,ui->tableView_4);
+    squid->remove_row_squid(model3,ui->tableView_4);
 }
 
 /*
@@ -231,37 +228,37 @@ void MainWindow::delete_row_squid_msnt()
  */
 void MainWindow::start_squid()
 {
-    if(start_service() == true)
+    if(squid->start_service() == true)
     {
-        view_log_error(ui->statusBar);
+        squid->view_log_error(ui->statusBar);
     }
     else
-        view_log_error(ui->statusBar);
+        squid->view_log_error(ui->statusBar);
 }
 
 void MainWindow::stop_squid()
 {
-    if(stop_service() == true)
+    if(squid->stop_service() == true)
     {
-        view_log_error(ui->statusBar);
+        squid->view_log_error(ui->statusBar);
     }
     else
-        view_log_error(ui->statusBar);
+        squid->view_log_error(ui->statusBar);
 }
 
 void MainWindow::restart_squid()
 {
-    if(restart_service() == true)
+    if(squid->restart_service() == true)
     {
-        view_log_error(ui->statusBar);
+        squid->view_log_error(ui->statusBar);
     }
     else
-        view_log_error(ui->statusBar);
+        squid->view_log_error(ui->statusBar);
 }
 
 void MainWindow::status_squid()
 {
-    service_status();
+    squid->service_status();
 }
 
 void MainWindow::lista_squid()
@@ -354,7 +351,7 @@ void MainWindow::view_signal_dans()
     //DansGuardian parameter
     connect(ui->read_file_dans_c,SIGNAL(clicked(bool)),this,SLOT(view_parameter_dans()));
     connect(ui->write_file_dans_c,SIGNAL(clicked(bool)),this,SLOT(write_parameter_dans()));
-    //Start, stop and restart server dansguardian
+    //Start, stop and restart server e2guardian
     connect(ui->start_dans,SIGNAL(clicked(bool)),this,SLOT(start_dans()));
     connect(ui->stop_dans,SIGNAL(clicked(bool)),this,SLOT(stop_dans()));
     connect(ui->restart_dans,SIGNAL(clicked(bool)),this,SLOT(restart_dans()));
@@ -363,9 +360,9 @@ void MainWindow::view_signal_dans()
     connect(ui->main_ret,SIGNAL(clicked(bool)),this,SLOT(view_main_stack()));
     //View stack dans
     connect(ui->config_dans,SIGNAL(clicked(bool)),this,SLOT(view_stack_dans()));
-    //Backup and restore dansguardian
-    connect(ui->actionBackup_dansguardian,SIGNAL(triggered(bool)),this,SLOT(backup_dans()));
-    connect(ui->actionRestore_backup_dansguardian,SIGNAL(triggered(bool)),this,SLOT(restore_dans()));
+    //Backup and restore e2guardian
+    connect(ui->actionBackup_e2guardian,SIGNAL(triggered(bool)),this,SLOT(backup_dans()));
+    connect(ui->actionRestore_backup_e2guardian,SIGNAL(triggered(bool)),this,SLOT(restore_dans()));
     //Add and remove row squid config
     connect(ui->m_row_dans_c,SIGNAL(clicked(bool)),this,SLOT(add_row_dans()));
     connect(ui->m_delete_dans_c,SIGNAL(clicked(bool)),this,SLOT(delete_row_dans()));
@@ -379,7 +376,7 @@ void MainWindow::view_vis_dans()
 
 void MainWindow::view_list_dans()
 {
-    //List parameter dansguardian.conf
+    //List parameter e2guardian.conf
     m_dans_c->setRowCount(0);
     m_dans_c->setHeaderData(0,Qt::Horizontal,tr("Parameter"));
     m_dans_c->setHeaderData(1,Qt::Horizontal,tr("Equal"));
@@ -389,7 +386,7 @@ void MainWindow::view_list_dans()
     ui->tableView_dans_conf->setSelectionMode(QAbstractItemView::SingleSelection);
 }
 
-//View stack dansguardian
+//View stack e2guardian
 void MainWindow::view_stack_dans()
 {
     view_dans();
@@ -401,45 +398,45 @@ void MainWindow::view_stack_dans()
 void MainWindow::view_dans()
 {
 #ifdef Q_OS_LINUX
-    find_file_config_dans("/etc/dansguardian/dansguardian.conf",ui->stackedWidget);
+    find_file_config_dans("/etc/e2guardian/e2guardian.conf",ui->stackedWidget);
 #elif defined Q_OS_FREEBSD
-    find_file_config_dans("/usr/local/etc/dansguardian/dansguardian.conf",ui->stackedWidget);
+    find_file_config_dans("/usr/local/etc/e2guardian/e2guardian.conf",ui->stackedWidget);
 #endif
 }
 
 void MainWindow::view_parameter_dans()
 {
 #ifdef Q_OS_LINUX
-    read_file_dans("/etc/dansguardian/dansguardian.conf",m_dans_c);
+    read_file_dans("/etc/e2guardian/e2guardian.conf",m_dans_c);
 #elif defined Q_OS_FREEBSD
-    read_file_dans("/usr/local/etc/dansguardian/dansguardian.conf",m_dans_c);
+    read_file_dans("/usr/local/etc/e2guardian/e2guardian.conf",m_dans_c);
 #endif
 }
 
 void MainWindow::write_parameter_dans()
 {
 #ifdef Q_OS_LINUX
-    write_file_dans("/etc/dansguardian/dansguardian.conf",ui->tableView_dans_conf);
+    write_file_dans("/etc/e2guardian/e2guardian.conf",ui->tableView_dans_conf);
 #elif defined Q_OS_FREEBSD
-    write_file_dans("/usr/local/etc/dansguardian/dansguardian.conf",ui->tableView_dans_conf);
+    write_file_dans("/usr/local/etc/e2guardian/e2guardian.conf",ui->tableView_dans_conf);
 #endif
 }
 
 void MainWindow::backup_dans()
 {
 #ifdef Q_OS_LINUX
-    backup_dans_config("/etc/dansguardian/dansguardian.conf");
+    backup_dans_config("/etc/e2guardian/e2guardian.conf");
 #elif defined Q_OS_FREEBSD
-    backup_dans_config("/usr/local/etc/dansguardian/dansguardian.conf");
+    backup_dans_config("/usr/local/etc/e2guardian/e2guardian.conf");
 #endif
 }
 
 void MainWindow::restore_dans()
 {
 #ifdef Q_OS_LINUX
-    restore_dans_config("/etc/dansguardian/dansguardian.conf");
+    restore_dans_config("/etc/e2guardian/e2guardian.conf");
 #elif defined Q_OS_FREEBSD
-    restore_dans_config("/usr/local/etc/dansguardian/dansguardian.conf");
+    restore_dans_config("/usr/local/etc/e2guardian/e2guardian.conf");
 #endif
 }
 

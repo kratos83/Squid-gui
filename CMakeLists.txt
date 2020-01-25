@@ -16,7 +16,7 @@ INCLUDE(CheckFunctionExists)
 INCLUDE(FindPkgConfig)
 
 SET(VERSION_MAJOR "0")
-SET(VERSION_MINOR "1")
+SET(VERSION_MINOR "3")
 
 #SET(VERSION_SUFFIX "")
 SET(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}")
@@ -28,15 +28,15 @@ INCLUDE(DetectMachine)
 
 #Abilito la compilazione con le qt5
 OPTION(WANT_DANS		"Build with Dansguardian" OFF)
-OPTION(WANT_E2DANS		"Build with E2Guardian" OFF)
+OPTION(WANT_E2DANS		"Build with E2Guardian" ON)
 
 LIST(APPEND CMAKE_PREFIX_PATH "${CMAKE_INSTALL_PREFIX}")
 
-#if(WANT_DANS)
- #   FIND_PACKAGE(Dansguardian REQUIRED)
-#elseif(WANT_E2DANS)
- #   FIND_PACKAGE(E2Guardian REQUIRED)
-#endif()
+if(WANT_DANS)
+    FIND_PACKAGE(Dansguardian REQUIRED)
+elseif(WANT_E2DANS)
+    FIND_PACKAGE(E2Guardian REQUIRED)
+endif()
 	
 FIND_PACKAGE(Qt5Widgets REQUIRED)
 FIND_PACKAGE(Qt5Gui REQUIRED)
@@ -93,6 +93,10 @@ MESSAGE("\n"
 "* Install Directory           : ${CMAKE_INSTALL_PREFIX}\n"
 "* Build type                  : ${CMAKE_BUILD_TYPE}\n"
 "* Platform                    : ${CMAKE_SYSTEM_PROCESSOR} (${Machine})\n"
+"############## Packages required ############\n"
+"# Dansguardian         :  ${WANT_DANS}\n"
+"# E2Guardian              :  ${WANT_E2DANS}\n"
+"###################################################\n"
 )
 
 MESSAGE(

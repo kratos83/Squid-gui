@@ -2,7 +2,14 @@
 #include "defines.h"
 #include "status_service.h"
 
-void squid_config::find_file_config(QString fileName, QStackedWidget *widget)
+using namespace squid_config;
+
+SquidConfig::SquidConfig(QObject *parent)
+  :  QObject(parent)
+{
+}
+
+void SquidConfig::find_file_config(QString fileName, QStackedWidget *widget)
 {
      QFile file(fileName);
      if(!file.open(QIODevice::ReadOnly))
@@ -19,7 +26,7 @@ void squid_config::find_file_config(QString fileName, QStackedWidget *widget)
      }
 }
 
-void squid_config::read_file(QString nameFile, QStandardItemModel *model)
+void SquidConfig::read_file(QString nameFile, QStandardItemModel *model)
 {
     QFile file(nameFile);
     if(file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -57,7 +64,7 @@ void squid_config::read_file(QString nameFile, QStandardItemModel *model)
     }
 }
 
-void squid_config::write_file(QString fileName, QTableView *view)
+void SquidConfig::write_file(QString fileName, QTableView *view)
 {
     QFile file(fileName);
     if(file.open(QIODevice::WriteOnly | QIODevice::Text))
@@ -112,7 +119,7 @@ void squid_config::write_file(QString fileName, QTableView *view)
     }
 }
 
-bool squid_config::start_service()
+bool SquidConfig::start_service()
 {
     bool ok = false;
     QProcess process;
@@ -127,7 +134,7 @@ bool squid_config::start_service()
     return ok ? true : false;
 }
 
-bool squid_config::stop_service()
+bool SquidConfig::stop_service()
 {
     bool ok = false;
     QProcess process;
@@ -142,7 +149,7 @@ bool squid_config::stop_service()
     return ok ? true : false;
 }
 
-bool squid_config::restart_service()
+bool SquidConfig::restart_service()
 {
     bool ok = false;
     QProcess process;
@@ -157,7 +164,7 @@ bool squid_config::restart_service()
     return ok ? true : false;
 }
 
-void squid_config::service_status()
+void SquidConfig::service_status()
 {
     QProcess process;
     process.setReadChannel(QProcess::StandardOutput);
@@ -186,7 +193,7 @@ void squid_config::service_status()
 #endif
 }
 
-void squid_config::view_log_error(QStatusBar *label)
+void SquidConfig::view_log_error(QStatusBar *label)
 {
     QProcess process;
 #ifdef Q_OS_LINUX
@@ -244,7 +251,7 @@ void squid_config::view_log_error(QStatusBar *label)
 #endif
 }
 
-void squid_config::backup_squid_config(QString filename)
+void SquidConfig::backup_squid_config(QString filename)
 {
     QProcess process;
     process.setEnvironment(QProcess::systemEnvironment());
@@ -255,7 +262,7 @@ void squid_config::backup_squid_config(QString filename)
 		      LOG_INFO_ALL,QIODevice::Append);
 }
 
-void squid_config::restore_squid_config(QString filename)
+void SquidConfig::restore_squid_config(QString filename)
 {
     QProcess process;
     process.setReadChannel(QProcess::StandardOutput);
@@ -267,7 +274,7 @@ void squid_config::restore_squid_config(QString filename)
 		      LOG_INFO_ALL,QIODevice::Append);
 }
 
-void squid_config::insert_row_squid(QStandardItemModel *model)
+void SquidConfig::insert_row_squid(QStandardItemModel *model)
 {
     QList<QStandardItem*> item;
     QStandardItem *new_row = new QStandardItem;
@@ -275,7 +282,7 @@ void squid_config::insert_row_squid(QStandardItemModel *model)
     model->appendRow(item);
 }
 
-void squid_config::remove_row_squid(QStandardItemModel *model, QTableView *view)
+void SquidConfig::remove_row_squid(QStandardItemModel *model, QTableView *view)
 {
     QModelIndex currentIndex = view->selectionModel()->currentIndex();
     model->removeRow(currentIndex.row());
